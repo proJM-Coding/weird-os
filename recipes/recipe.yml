@@ -22,10 +22,13 @@ modules:
       packages:
         - kernel
         - systemd
+        - ostree
         - bootc
         - plasma-desktop
         - plasma-login-manager 
         - kcm-plasmalogin
+      exclude:
+        - kernel-debug
 
   - type: systemd
     system:
