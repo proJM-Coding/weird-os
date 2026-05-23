@@ -6,8 +6,8 @@ name: weird-os
 description: This is my personal OS image.
 
 labels:
-  - containers.bootc: 1
-  - ostree.bootable: 1
+  containers.bootc: 1
+  ostree.bootable: 1
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: quay.io/fedora/fedora-minimal
@@ -24,6 +24,10 @@ modules:
   - type: dnf
     install:
       packages:
+        - bootc
+        - systemd
+        - kernel
+        - dnf
         - plasma-desktop
         - plasma-login-manager 
         - kcm-plasmalogin
