@@ -6,8 +6,8 @@ name: weird-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: quay.io/fedora/fedora-minimal
-image-version: 43 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/secureblue/kinoite-main-hardened
+image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -20,24 +20,9 @@ modules:
   - type: dnf
     install:
       packages:
-        - bootc
-        - systemd
-        - kernel
-        - dnf
-        - plasma-desktop
-        - plasma-login-manager 
-        - kcm-plasmalogin
-      exclude:
-        - kernel-debug
-
-  - type: systemd
-    system:
-      enabled:
-        - plasmalogin.service
-  
-  - type: containerfile
+        - fastfetch
+  - type: script
     snippets:
-      - LABEL containers.bootc 1
-      - LABEL ostree.bootable 1
+      - "ln -s /bin/bash /bin/rbash"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
