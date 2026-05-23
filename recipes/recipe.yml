@@ -6,7 +6,7 @@ name: weird-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/secureblue/kinoite-main-hardened
+base-image: iot-main-hardened
 image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -20,7 +20,16 @@ modules:
   - type: dnf
     install:
       packages:
-        - fastfetch
+        - plasma-desktop
+        - dolphin
+        - plasma-login-manager 
+        - kcm-plasmalogin
+
+  - type: systemd
+    system:
+      enabled:
+        - plasmalogin.service
+        
   - type: script
     snippets:
       - "ln -s /bin/bash /bin/rbash"
